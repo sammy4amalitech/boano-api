@@ -1,7 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 import uuid as uuid_pkg
 
+from sqlalchemy import Column, DateTime
 from sqlmodel import SQLModel, Field
 from pydantic import validator
 
@@ -13,13 +14,16 @@ class UserBase(SQLModel):
 
 
 class User(UserBase, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: uuid_pkg.UUID = Field(default_factory=uuid_pkg.uuid4, primary_key=True)
     profile_image_url: str = Field("https://www.profileimageurl.com")
     hashed_password: str
     is_superuser: bool = Field(default=False)
     tier_id: Optional[int] = Field(default=None, foreign_key="tier.id")
-    created_at: datetime = Field(default_factory=lambda: datetime.now(datetime.timezone.utc))
-    uuid: uuid_pkg.UUID = Field(default_factory=uuid_pkg.uuid4, primary_key=True)
+    created_at: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc),
+        sa_column=Column(DateTime(timezone=True))
+    )
+    uuid: uuid_pkg.UUID = Field(default_factory=uuid_pkg.uuid4)
     updated_at: Optional[datetime] = None
     deleted_at: Optional[datetime] = None
     is_deleted: bool = Field(default=False)
