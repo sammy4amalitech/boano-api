@@ -1,7 +1,7 @@
+import uuid
 from datetime import datetime
 from typing import Optional
 from sqlmodel import SQLModel, Field, Relationship
-from uuid import uuid4
 
 
 class PostBase(SQLModel):
@@ -11,7 +11,7 @@ class PostBase(SQLModel):
 
 class Post(PostBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    created_by_user_id: int = Field(foreign_key="user.id")
+    created_by_user_id: uuid.UUID = Field(foreign_key="user.id")
     media_url: Optional[str] = Field(default=None, regex=r"^(https?|ftp)://[^\s/$.?#].[^\s]*$", schema_extra={"example": "https://www.postimageurl.com"})
     created_at: datetime = Field(default_factory=lambda: datetime.now(datetime.timezone.utc))
     updated_at: Optional[datetime] = None
