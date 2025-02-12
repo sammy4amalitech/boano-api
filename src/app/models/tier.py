@@ -1,5 +1,7 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
+
+from sqlalchemy import Column, DateTime
 from sqlmodel import SQLModel, Field
 
 
@@ -9,7 +11,10 @@ class TierBase(SQLModel):
 
 class Tier(TierBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(datetime.timezone.utc))
+    created_at: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc),
+        sa_column=Column(DateTime(timezone=True))
+    )
     updated_at: Optional[datetime] = None
 
 

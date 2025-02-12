@@ -1,6 +1,8 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
+
+from sqlalchemy import DateTime, Column
 from sqlmodel import SQLModel, Field, Relationship
 
 
@@ -13,7 +15,10 @@ class Post(PostBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     created_by_user_id: uuid.UUID = Field(foreign_key="user.id")
     media_url: Optional[str] = Field(default=None, regex=r"^(https?|ftp)://[^\s/$.?#].[^\s]*$", schema_extra={"example": "https://www.postimageurl.com"})
-    created_at: datetime = Field(default_factory=lambda: datetime.now(datetime.timezone.utc))
+    created_at: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc),
+        sa_column=Column(DateTime(timezone=True))
+    )
     updated_at: Optional[datetime] = None
     deleted_at: Optional[datetime] = None
     is_deleted: bool = Field(default=False)
