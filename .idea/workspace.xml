@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="fix post creator error">
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="updated timestamp field">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/db/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/db/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/post.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/post.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/tier.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/tier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/migrations/env.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739275167776</updated>
       <workItem from="1739275170050" duration="10694000" />
-      <workItem from="1739306722197" duration="15598000" />
+      <workItem from="1739306722197" duration="20854000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -118,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739366734590</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="updated timestamp field">
+      <option name="closed" value="true" />
+      <created>1739371492485</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739371492485</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +130,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="fix post creator error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix post creator error" />
+    <MESSAGE value="updated timestamp field" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated timestamp field" />
   </component>
 </project>

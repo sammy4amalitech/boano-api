@@ -99,6 +99,7 @@
    1. [Running](#513-running)
    1. [Create Application](#514-create-application)
    2. [Opting Out of Services](#515-opting-out-of-services)
+   3. [AutoGen Integration](#516-autogen-integration)
 1. [Running in Production](#6-running-in-production)
    1. [Uvicorn Workers with Gunicorn](#61-uvicorn-workers-with-gunicorn)
    1. [Running With NGINX](#62-running-with-nginx)
@@ -648,7 +649,7 @@ First, you may want to take a look at the project structure and understand what 
 ### 5.2 Database Model
 
 Create the new entities and relationships and add them to the model <br>
-![diagram](https://user-images.githubusercontent.com/43156212/284426387-bdafc637-0473-4b71-890d-29e79da288cf.png)
+![diagram](https://user-images.githubusercontent.com/43156212/284426387-bdafc637-0473-4c71-890d-29e79da288cf.png)
 
 #### 5.2.1 Token Blacklist
 
@@ -1451,6 +1452,40 @@ volumes:
   redis-data:
   #pgadmin-data:
 ```
+
+### 5.16 AutoGen Integration
+
+This project includes integration with AutoGen for handling agent-based chat interactions. The integration supports both REST and WebSocket endpoints.
+
+#### REST Endpoint
+
+The REST endpoint allows for synchronous, one-shot queries.
+
+- **Endpoint:** `POST /v1/autogen/query`
+- **Description:** Receives a user query, initiates a chat with the AutoGen agent, and returns a summarized result.
+- **Request Body:**
+  ```json
+  {
+    "query": "Your query here"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "response": "Final result from chat."
+  }
+  ```
+
+#### WebSocket Endpoint
+
+The WebSocket endpoint supports interactive, streaming, or real-time messages.
+
+- **Endpoint:** `ws://<your-domain>/v1/autogen/ws/{chat_id}`
+- **Description:** Establishes a WebSocket connection for real-time chat with the AutoGen agent.
+- **Usage:**
+  - Connect to the WebSocket endpoint.
+  - Send messages to the agent.
+  - Receive real-time responses from the agent.
 
 ## 6. Running in Production
 
