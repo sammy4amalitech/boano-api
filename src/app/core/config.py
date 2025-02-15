@@ -102,6 +102,12 @@ class EnvironmentSettings(BaseSettings):
     ENVIRONMENT: EnvironmentOption = config("ENVIRONMENT", default="local")
     DB_ENGINE: DBOption = config("DB_ENGINE", default="sqlite")
 
+class AISettings(BaseSettings):
+    OPENAI_API_KEY: str = config("OPENAI_API_KEY", default=None)
+
+class AccessTokenSettings(BaseSettings):
+    GITHUB_ACCESS_TOKEN: str = config("GITHUB_ACCESS_TOKEN", default=None)
+
 
 db_type = PostgresSettings
 if config("DB_ENGINE", default="sqlite") == "sqlite":
@@ -120,6 +126,7 @@ class Settings(
     RedisRateLimiterSettings,
     DefaultRateLimitSettings,
     EnvironmentSettings,
+    AISettings,
 ):
     pass
 

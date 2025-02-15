@@ -2,10 +2,13 @@ import asyncio
 import autogen
 from typing import Dict, Any
 
+from src.app.core.config import AISettings
+
+
 class AgentChatManager:
     def __init__(self, llm_config=None):
         if llm_config is None:
-            llm_config = {"model": "gpt-3.5-turbo", "temperature": 0}
+            llm_config = {"model": "gpt-3.5-turbo", "temperature": 0,"api_key": AISettings().OPENAI_API_KEY}
             
         # Basic assistant for simple queries
         self.assistant = autogen.AssistantAgent(
@@ -38,16 +41,17 @@ class AgentChatManager:
         
         self.outgoing_queue = asyncio.Queue()
         self.incoming_queue = asyncio.Queue()
-        self.user_proxy.set_queues(self.incoming_queue, self.outgoing_queue)
+        # Ensure the user proxy agent can handle the queues
+        self.user_proxy.incoming_queue = self.incoming_queue
+        self.user_proxy.outgoing_queue = self.outgoing_queue
 
     async def initiate_basic_chat(self, message: str):
         try:
-            await self.user_proxy.a_initiate_chat(
-                self.assistant,
-                clear_history=True,
-                message=message
-            )
+            print("Initiating basic chat...")
+            agent  = self.assistant
+            print("Waiting for response from outgoing queue...")
             final_response = await self.outgoing_queue.get()
+            print('Final response:', final_response)
             return {"type": "basic", "response": final_response}
         except Exception as e:
             print(f"Error in basic chat: {str(e)}")

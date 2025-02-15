@@ -1,8 +1,8 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, Depends
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 import asyncio
 import uvicorn
-from app.agents.chat_manager import AgentChatManager
-from app.api.websocket_manager import ConnectionManager
+from src.app.ai.agents.chat_manager import AgentChatManager
+from src.app.api.websocket_manager import ConnectionManager
 
 app = FastAPI()
 manager = ConnectionManager()

@@ -1,13 +1,11 @@
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect, HTTPException, Depends
-from typing import Dict
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, HTTPException
 import asyncio
-import json
 
-from app.agents.chat_manager import AgentChatManager
-from app.api.websocket_manager import ConnectionManager
-from app.models.chat import ChatRequest, ChatResponse, StreamingChatRequest
+from src.app.ai.agents.chat_manager import AgentChatManager
+from src.app.api.websocket_manager import ConnectionManager
+from src.app.models.chat import ChatRequest, ChatResponse, StreamingChatRequest
 
-router = APIRouter()
+router = APIRouter(tags=["autogen"])
 manager = ConnectionManager()
 
 # REST Endpoints for one-shot interactions
@@ -36,6 +34,7 @@ async def handle_specialized_query(request: ChatRequest):
             response = await chat_manager.initiate_math_chat(request.message)
         else:
             response = await chat_manager.initiate_basic_chat(request.message)
+        print("response", response)
         return ChatResponse(**response)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
