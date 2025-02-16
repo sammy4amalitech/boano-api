@@ -4,29 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="updated timestamp field">
-      <change afterPath="$PROJECT_DIR$/src/app/ai/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/agents/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/agents/calender.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/agents/github.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/teams/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/toolkits/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/toolkits/github/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/toolkits/github/toolkit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/tools/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/tools/prompt.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ai/tools/tool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/api/v1/time_log.py" afterDir="false" />
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="commit logs tool">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/agents/chat_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/chat_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/v1/autogen.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/autogen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/websocket_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/websocket_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/v1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ai/agents/github.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/github.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/v1/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/time_log.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +137,7 @@
       <workItem from="1739275170050" duration="10694000" />
       <workItem from="1739306722197" duration="38864000" />
       <workItem from="1739548775608" duration="15819000" />
-      <workItem from="1739630917824" duration="2462000" />
+      <workItem from="1739630917824" duration="14490000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -180,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739371492485</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="commit logs tool">
+      <option name="closed" value="true" />
+      <created>1739633471055</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739633471055</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,7 +181,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="fix post creator error" />
     <MESSAGE value="updated timestamp field" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated timestamp field" />
+    <MESSAGE value="commit logs tool" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit logs tool" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -209,6 +201,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/boano_api$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1739632917617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/boano_api$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1739731651243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

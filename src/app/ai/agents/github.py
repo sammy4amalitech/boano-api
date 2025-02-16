@@ -28,15 +28,15 @@ class GitHubAgent:
             self.agent_name,
             model_client=model_client,
             tools=[self.get_commits],
-            system_message="Use tools to provide insights on commits from repository `https://github.com/sammy4gh/time-tracker-full-stack.git`. Remember to pass the full url to the tool.",
+            system_message="Use tools to provide insights on commits from repository `sammy4gh/time-tracker-full-stack`.",
         )
 
     async def get_commits(self, repository: str) -> List[dict]:
         g = self.g
-        # Then play with your Github objects:
+        # Then play with your GitHub objects:
         commits: List[dict] = []
 
-        repo = g.get_repo('sammy4gh/time-tracker-full-stack')
+        repo = g.get_repo(repository)
         since_date = datetime.strptime('2021-01-01T00:00:00Z', '%Y-%m-%dT%H:%M:%SZ')
         until_date = datetime.strptime('2025-01-31T23:59:59Z', '%Y-%m-%dT%H:%M:%SZ')
         repo_commits = repo.get_commits(since=since_date, until=until_date)

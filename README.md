@@ -1453,40 +1453,6 @@ volumes:
   #pgadmin-data:
 ```
 
-### 5.16 AutoGen Integration
-
-This project includes integration with AutoGen for handling agent-based chat interactions. The integration supports both REST and WebSocket endpoints.
-
-#### REST Endpoint
-
-The REST endpoint allows for synchronous, one-shot queries.
-
-- **Endpoint:** `POST /v1/autogen/query`
-- **Description:** Receives a user query, initiates a chat with the AutoGen agent, and returns a summarized result.
-- **Request Body:**
-  ```json
-  {
-    "query": "Your query here"
-  }
-  ```
-- **Response:**
-  ```json
-  {
-    "response": "Final result from chat."
-  }
-  ```
-
-#### WebSocket Endpoint
-
-The WebSocket endpoint supports interactive, streaming, or real-time messages.
-
-- **Endpoint:** `ws://<your-domain>/v1/autogen/ws/{chat_id}`
-- **Description:** Establishes a WebSocket connection for real-time chat with the AutoGen agent.
-- **Usage:**
-  - Connect to the WebSocket endpoint.
-  - Send messages to the agent.
-  - Receive real-time responses from the agent.
-
 ## 6. Running in Production
 
 ### 6.1 Uvicorn Workers with Gunicorn
