@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="commit logs tool">
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="websocket setup">
+      <change beforePath="$PROJECT_DIR$/.idea/boano-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/boano-api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ai/agents/calender.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/calender.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/ai/agents/github.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/github.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/api/v1/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/time_log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/core/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +72,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;FastAPI.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;FastAPI.dev.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
@@ -79,7 +84,7 @@
     &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.ApplicationConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -101,14 +106,14 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="Python.FastAPI" nameIsGenerated="true">
+    <configuration name="dev" type="Python.FastAPI">
       <option name="file" value="$PROJECT_DIR$/src/app/main.py" />
       <module name="boano-api" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="$PROJECT_DIR$/.venv/bin/python" />
-      <option name="SDK_NAME" value="Python 3.11 (boano-api)" />
+      <option name="SDK_HOME" value="$USER_HOME$/Library/Caches/pypoetry/virtualenvs/fastapi-boilerplate-ul2-OqLy-py3.12/bin/python" />
+      <option name="SDK_NAME" value="Poetry (boano-api) (2)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -137,7 +142,12 @@
       <workItem from="1739275170050" duration="10694000" />
       <workItem from="1739306722197" duration="38864000" />
       <workItem from="1739548775608" duration="15819000" />
-      <workItem from="1739630917824" duration="14490000" />
+      <workItem from="1739630917824" duration="44602000" />
+      <workItem from="1740076677908" duration="264000" />
+      <workItem from="1740076984063" duration="16000" />
+      <workItem from="1740077029735" duration="64000" />
+      <workItem from="1740077277359" duration="416000" />
+      <workItem from="1740078293711" duration="1660000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -171,18 +181,38 @@
       <option name="project" value="LOCAL" />
       <updated>1739633471055</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="websocket setup">
+      <option name="closed" value="true" />
+      <created>1739732625530</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739732625530</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="fix post creator error" />
     <MESSAGE value="updated timestamp field" />
     <MESSAGE value="commit logs tool" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit logs tool" />
+    <MESSAGE value="websocket setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="websocket setup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -201,6 +231,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/boano_api$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1739731651243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/boano_api$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1739821774670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/boano_api$dev.coverage" NAME="dev Coverage Results" MODIFIED="1740079472647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
