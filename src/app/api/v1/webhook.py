@@ -9,6 +9,9 @@ from ...core.db.database import async_get_db
 from ...core.config import settings
 from fastapi import Depends
 
+from ...crud.crud_users import crud_users
+from ...models.user import UserCreateInternal, UserUpdate
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/webhooks",tags=["webhooks"])
@@ -20,21 +23,81 @@ if not WEBHOOK_SECRET:
 
 async def process_user_created(event_data: dict, db: AsyncSession):
     """Handle user.created event"""
-    user_id = event_data.get("id")
-    # Add your logic to sync user data with your database
-    print(f"User created: {user_id}")
+    # Extract user data from the event
+    email_addresses = event_data.get("email_addresses", [])
+    primary_email_id = event_data.get("primary_email_address_id")
+    email = next((e["email_address"] for e in email_addresses if e["id"] == primary_email_id), None)
+    
+    if not email:
+        logger.error(f"No primary email found for user {event_data.get('id')}")
+        return
+    
+    # Create user data
+    user_data = {
+        "name": f"{event_data.get('first_name', '')} {event_data.get('last_name', '')}".strip(),
+        "username": event_data.get('username') or email.split('@')[0],
+        "email": email,
+        "profile_image_url": event_data.get('profile_image_url', 'https://www.gravatar.com/avatar?d=mp'),
+        "uuid": str(event_data.get('id'))  # Ensure the ID is converted to string
+    }
+    
+    try:
+        user_create = UserCreateInternal(**user_data)
+        await crud_users.create(db=db, object=user_create)
+        logger.info(f"User created successfully: {user_data['email']}")
+    except Exception as e:
+        logger.error(f"Error creating user: {str(e)}\nUser data: {user_data}")
 
 async def process_user_updated(event_data: dict, db: AsyncSession):
     """Handle user.updated event"""
     user_id = event_data.get("id")
-    # Add your logic to update user data in your database
-    print(f"User updated: {user_id}")
+    
+    # Get existing user
+    db_user = await crud_users.get(db=db, uuid=user_id)
+    if not db_user:
+        logger.error(f"User not found for update: {user_id}")
+        return
+    
+    # Extract updated data
+    email_addresses = event_data.get("email_addresses", [])
+    primary_email_id = event_data.get("primary_email_address_id")
+    email = next((e["email_address"] for e in email_addresses if e["id"] == primary_email_id), None)
+    
+    update_data = {
+        "name": f"{event_data.get('first_name', '')} {event_data.get('last_name', '')}".strip(),
+        "profile_image_url": event_data.get('profile_image_url')
+    }
+    
+    if email:
+        update_data["email"] = email
+    
+    if event_data.get('username'):
+        update_data["username"] = event_data["username"]
+    
+    try:
+        user_update = UserUpdate(**update_data)
+        await crud_users.update(db=db, object=user_update, uuid=user_id)
+        logger.info(f"User updated successfully: {user_id}")
+    except Exception as e:
+        logger.error(f"Error updating user: {str(e)}\nUpdate data: {update_data}")
 
 async def process_user_deleted(event_data: dict, db: AsyncSession):
     """Handle user.deleted event"""
     user_id = event_data.get("id")
-    # Add your logic to handle user deletion in your database
-    print(f"User deleted: {user_id}")
+    
+    try:
+        # Get existing user
+        db_user = await crud_users.get(db=db, uuid=user_id)
+        if not db_user:
+            logger.error(f"User not found for deletion: {user_id}")
+            return
+            
+        # Soft delete the user
+        await crud_users.delete(db=db, uuid=user_id)
+        logger.info(f"User deleted successfully: {user_id}")
+    except Exception as e:
+        logger.error(f"Error deleting user: {str(e)}")
+
 
 @router.post("/clerk")
 async def clerk_webhook(

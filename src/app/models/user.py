@@ -11,6 +11,7 @@ class UserBase(SQLModel):
     name: str = Field(..., min_length=2, max_length=30, schema_extra={"example": "User Userson"})
     username: str = Field(..., min_length=2, max_length=20, regex="^[a-z0-9]+$", schema_extra={"example": "userson"})
     email: str = Field(..., schema_extra={"example": "user.userson@example.com"})
+    uuid: str = Field(unique=True, default_factory=lambda: str(uuid_pkg.uuid4()))
 
 
 class User(UserBase, table=True):
@@ -22,7 +23,7 @@ class User(UserBase, table=True):
         default_factory=lambda: datetime.now(timezone.utc),
         sa_column=Column(DateTime(timezone=True))
     )
-    uuid: uuid_pkg.UUID = Field(default_factory=uuid_pkg.uuid4)
+    email: str = Field(..., unique=True)
     updated_at: Optional[datetime] = None
     deleted_at: Optional[datetime] = None
     is_deleted: bool = Field(default=False)
@@ -38,17 +39,11 @@ class UserRead(SQLModel):
 
 
 class UserCreate(UserBase):
-    password: str = Field(..., regex="^.{8,}|[0-9]+|[A-Z]+|[a-z]+|[^a-zA-Z0-9]+$", schema_extra={"example": "Str1ngst!"})
-
-    @validator('password')
-    def validate_password(cls, value):
-        if len(value) < 8:
-            raise ValueError("Password must be at least 8 characters")
-        return value
+    pass
 
 
 class UserCreateInternal(UserBase):
-    hashed_password: str
+    pass
 
 
 class UserUpdate(SQLModel):

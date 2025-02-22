@@ -30,8 +30,6 @@ async def write_user(
         raise DuplicateValueException("Username not available")
 
     user_internal_dict = user.model_dump()
-    user_internal_dict["hashed_password"] = get_password_hash(password=user_internal_dict["password"])
-    del user_internal_dict["password"]
 
     user_internal = UserCreateInternal(**user_internal_dict)
     created_user: UserRead = await crud_users.create(db=db, object=user_internal)

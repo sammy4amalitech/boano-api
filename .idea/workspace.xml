@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="clerk setup">
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="webhook setup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/v1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/v1/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/v1/webhook.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/webhook.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_history.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_state.json" afterDir="false" />
     </list>
@@ -148,7 +148,7 @@
       <workItem from="1740172608208" duration="438000" />
       <workItem from="1740220554510" duration="1264000" />
       <workItem from="1740221823429" duration="4956000" />
-      <workItem from="1740252980969" duration="2988000" />
+      <workItem from="1740252980969" duration="7045000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -222,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740253527152</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="webhook setup">
+      <option name="closed" value="true" />
+      <created>1740257247255</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1740257247255</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,7 +256,8 @@
     <MESSAGE value="moved to poetry file" />
     <MESSAGE value="added cors" />
     <MESSAGE value="clerk setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="clerk setup" />
+    <MESSAGE value="webhook setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="webhook setup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
