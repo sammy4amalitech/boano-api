@@ -1,8 +1,14 @@
+import base64
 from datetime import UTC, datetime, timedelta
 from typing import Any, Literal
 
 import bcrypt
+import rsa
+from clerk_backend_api import Clerk
+from cryptography.hazmat.primitives import serialization
+from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordBearer
+from fastcrud.exceptions.http_exceptions import CustomException
 from jose import JWTError, jwt
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -18,6 +24,16 @@ REFRESH_TOKEN_EXPIRE_DAYS = settings.REFRESH_TOKEN_EXPIRE_DAYS
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/login")
 
+class DecodeTokenException(CustomException):
+    code = 400
+    error_code = "TOKEN__DECODE_ERROR"
+    message = "token decode error"
+
+
+class ExpiredTokenException(CustomException):
+    code = 400
+    error_code = "TOKEN__EXPIRE_TOKEN"
+    message = "expired token"
 
 async def verify_password(plain_password: str, hashed_password: str) -> bool:
     correct_password: bool = bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
@@ -86,8 +102,9 @@ async def verify_token(token: str, db: AsyncSession) -> TokenData | None:
         return None
 
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username_or_email: str = payload.get("sub")
+        # payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt_claim(token)
+        username_or_email: str = payload.get("email") or payload.get("username")
         if username_or_email is None:
             return None
         return TokenData(username_or_email=username_or_email)
@@ -100,3 +117,44 @@ async def blacklist_token(token: str, db: AsyncSession) -> None:
     payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
     expires_at = datetime.fromtimestamp(payload.get("exp"))
     await crud_token_blacklist.create(db, object=TokenBlacklistCreate(**{"token": token, "expires_at": expires_at}))
+
+
+
+def jwt_claim(token: str):
+        try:
+            with Clerk(bearer_auth=settings.CLERK_SECRET_KEY) as sdk:
+                # get key set
+                jdk = sdk.jwks.get()
+                first_key = jdk.keys[0]  # Extract the first key
+                decoded = TokenHelper.decode_jwt(token, first_key)  # Pass the first key to decode_jwt
+                if decoded is not None:
+                    # handle response
+                    return decoded
+        except Exception as e:
+            print('error:', e)
+            HTTPException(status_code=401, detail="Invalid Token")
+
+
+class TokenHelper:
+
+    @staticmethod
+    def jwk_to_pem(jwk):
+        n = base64.urlsafe_b64decode(jwk.n + '==')
+        e = base64.urlsafe_b64decode(jwk.e + '==')
+
+        public_numbers = rsa.RSAPublicNumbers(
+            e=int.from_bytes(e, 'big'),
+            n=int.from_bytes(n, 'big')
+        )
+        public_key = public_numbers.public_key()
+
+        return public_key.public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
+        )
+
+    @staticmethod
+    def decode_jwt(token, jwk):
+        pem = TokenHelper.jwk_to_pem(jwk)
+        public_key = serialization.load_pem_public_key(pem)
+        return jwt.decode(token, public_key, algorithms=['RS256'])

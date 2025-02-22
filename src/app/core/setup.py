@@ -17,8 +17,7 @@ from ..api.dependencies import get_current_superuser
 from ..middleware.client_cache_middleware import ClientCacheMiddleware
 from .config import (
     AppSettings,
-    ClientSideCacheSettings,
-    DatabaseSettings,
+    ClientSideCacheSettings,    DatabaseSettings,
     EnvironmentOption,
     EnvironmentSettings,
     RedisCacheSettings,
@@ -211,15 +210,9 @@ def create_application(
                 out: dict = get_openapi(title=application.title, version=application.version, routes=application.routes)
                 return out
 
-            origins = [
-                "http://localhost",
-                "http://localhost:8080",
-                "http://localhost:3000",
-            ]
-
             application.add_middleware(
                 CORSMiddleware,
-                allow_origins=origins,
+                allow_origins=["*"],
                 allow_credentials=True,
                 allow_methods=["*"],
                 allow_headers=["*"],
