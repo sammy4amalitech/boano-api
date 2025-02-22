@@ -23,7 +23,8 @@ class CryptSettings(BaseSettings):
     ALGORITHM: str = config("ALGORITHM", default="HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = config("ACCESS_TOKEN_EXPIRE_MINUTES", default=30)
     REFRESH_TOKEN_EXPIRE_DAYS: int = config("REFRESH_TOKEN_EXPIRE_DAYS", default=7)
-    CLERK_SECRET_KEY = config("CLERK_SECRET_KEY")
+    CLERK_SECRET_KEY:str = config("CLERK_SECRET_KEY")
+    CLERK_SIGNING_SECRET:str = config("CLERK_SIGNING_SECRET")
 
 
 class DatabaseSettings(BaseSettings):

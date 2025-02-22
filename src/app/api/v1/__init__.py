@@ -9,6 +9,7 @@ from .tasks import router as tasks_router
 from .tiers import router as tiers_router
 from .users import router as users_router
 from .time_log import router as time_log_router
+from .webhook import router as webhook_router
 
 router = APIRouter(prefix="/v1")
 router.include_router(login_router)
@@ -20,3 +21,4 @@ router.include_router(tiers_router)
 router.include_router(rate_limits_router)
 router.include_router(autogen_router)
 router.include_router(time_log_router)
+router.include_router(webhook_router)
