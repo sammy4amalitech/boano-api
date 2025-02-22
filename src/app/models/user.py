@@ -24,8 +24,14 @@ class User(UserBase, table=True):
         sa_column=Column(DateTime(timezone=True))
     )
     email: str = Field(..., unique=True)
-    updated_at: Optional[datetime] = None
-    deleted_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = Field(
+        default=None,
+        sa_column=Column(DateTime(timezone=True))
+    )
+    deleted_at: Optional[datetime] = Field(
+        default=None,
+        sa_column=Column(DateTime(timezone=True))
+    )
     is_deleted: bool = Field(default=False)
 
 
@@ -54,7 +60,7 @@ class UserUpdate(SQLModel):
 
 
 class UserUpdateInternal(UserUpdate):
-    updated_at: Optional[datetime] = Field(default_factory=datetime.utcnow)
+    pass
 
 
 class UserTierUpdate(SQLModel):

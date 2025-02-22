@@ -10,7 +10,7 @@ from ...core.config import settings
 from fastapi import Depends
 
 from ...crud.crud_users import crud_users
-from ...models.user import UserCreateInternal, UserUpdate
+from ...models.user import UserCreateInternal, UserUpdateInternal
 
 logger = logging.getLogger(__name__)
 
@@ -55,8 +55,9 @@ async def process_user_updated(event_data: dict, db: AsyncSession):
     # Get existing user
     db_user = await crud_users.get(db=db, uuid=user_id)
     if not db_user:
-        logger.error(f"User not found for update: {user_id}")
-        return
+        error_msg = f"User not found for update: {user_id}"
+        logger.error(error_msg)
+        raise HTTPException(status_code=404, detail=error_msg)
     
     # Extract updated data
     email_addresses = event_data.get("email_addresses", [])
@@ -75,11 +76,13 @@ async def process_user_updated(event_data: dict, db: AsyncSession):
         update_data["username"] = event_data["username"]
     
     try:
-        user_update = UserUpdate(**update_data)
+        user_update = UserUpdateInternal(**update_data)
         await crud_users.update(db=db, object=user_update, uuid=user_id)
         logger.info(f"User updated successfully: {user_id}")
     except Exception as e:
-        logger.error(f"Error updating user: {str(e)}\nUpdate data: {update_data}")
+        error_msg = f"Error updating user: {str(e)}"
+        logger.error(f"{error_msg}\nUpdate data: {update_data}")
+        raise HTTPException(status_code=500, detail=error_msg)
 
 async def process_user_deleted(event_data: dict, db: AsyncSession):
     """Handle user.deleted event"""
