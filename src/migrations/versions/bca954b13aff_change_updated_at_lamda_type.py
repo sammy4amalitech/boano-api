@@ -40,7 +40,7 @@ def downgrade() -> None:
                type_=postgresql.TIMESTAMP(),
                existing_nullable=True)
     op.alter_column('user', 'updated_at',
-               existing_type=sa.DateTime(timezone=True),
+               existing_type=sa.DateTime(timezone=True  ),
                type_=postgresql.TIMESTAMP(),
                existing_nullable=True)
     op.create_table('tokenblacklist',
