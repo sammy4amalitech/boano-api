@@ -80,7 +80,7 @@ def lifespan_factory(
         | RedisRateLimiterSettings
         | EnvironmentSettings
     ),
-    create_tables_on_start: bool = True,
+    create_tables_on_start: bool = False,
 ) -> Callable[[FastAPI], _AsyncGeneratorContextManager[Any]]:
     """Factory to create a lifespan async context manager for a FastAPI app."""
 
