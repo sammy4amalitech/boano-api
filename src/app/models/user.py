@@ -15,7 +15,7 @@ class UserBase(SQLModel):
 
 
 class User(UserBase, table=True):
-    id: uuid_pkg.UUID = Field(default_factory=uuid_pkg.uuid4, primary_key=True)
+    id: str = Field(default_factory=lambda: str(uuid_pkg.uuid4()), primary_key=True)
     profile_image_url: str = Field("https://www.profileimageurl.com")
     is_superuser: bool = Field(default=False)
     tier_id: Optional[int] = Field(default=None, foreign_key="tier.id")

@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="use clerk user id for uuid in db">
-      <change beforePath="$PROJECT_DIR$/src/app/api/v1/webhook.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/webhook.py" afterDir="false" />
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="crud timelog">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/v1/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/time_log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/post.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/timelog.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/timelog.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_history.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_state.json" afterDir="false" />
@@ -146,7 +150,7 @@
       <workItem from="1740172608208" duration="438000" />
       <workItem from="1740220554510" duration="1264000" />
       <workItem from="1740221823429" duration="4956000" />
-      <workItem from="1740252980969" duration="7913000" />
+      <workItem from="1740252980969" duration="11590000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -236,7 +240,31 @@
       <option name="project" value="LOCAL" />
       <updated>1740263336522</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="update user">
+      <option name="closed" value="true" />
+      <created>1740264487038</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1740264487038</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix timezone issue">
+      <option name="closed" value="true" />
+      <created>1740405475568</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1740405475568</updated>
+    </task>
+    <task id="LOCAL-00014" summary="crud timelog">
+      <option name="closed" value="true" />
+      <created>1740407174760</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1740407174760</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,7 +292,10 @@
     <MESSAGE value="clerk setup" />
     <MESSAGE value="webhook setup" />
     <MESSAGE value="use clerk user id for uuid in db" />
-    <option name="LAST_COMMIT_MESSAGE" value="use clerk user id for uuid in db" />
+    <MESSAGE value="update user" />
+    <MESSAGE value="fix timezone issue" />
+    <MESSAGE value="crud timelog" />
+    <option name="LAST_COMMIT_MESSAGE" value="crud timelog" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

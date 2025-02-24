@@ -13,7 +13,7 @@ class PostBase(SQLModel):
 
 class Post(PostBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    created_by_user_id: uuid.UUID = Field(foreign_key="user.id")
+    created_by_user_id: str = Field(foreign_key="user.id")
     media_url: Optional[str] = Field(default=None, regex=r"^(https?|ftp)://[^\s/$.?#].[^\s]*$", schema_extra={"example": "https://www.postimageurl.com"})
     created_at: datetime = Field(
         default_factory=lambda: datetime.now(timezone.utc),

@@ -1,8 +1,10 @@
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Optional, List
 
 from sqlalchemy import Column, DateTime, String, Text
 from sqlmodel import SQLModel, Field, Relationship
+from pydantic import BaseModel
+import uuid as uuid_pkg
 
 
 class TimeLogBase(SQLModel):
@@ -15,7 +17,7 @@ class TimeLogBase(SQLModel):
 
 class TimeLog(TimeLogBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    creator_id: uuid.UUID = Field(foreign_key="user.id")
+    creator_id: str = Field(foreign_key="user.id")
     creator: Optional["User"] = Relationship(back_populates="timelogs")
     created_at: datetime = Field(
         default_factory=lambda: datetime.now(timezone.utc),
@@ -31,7 +33,7 @@ class TimeLog(TimeLogBase, table=True):
 
 class TimeLogRead(TimeLogBase):
     id: int
-    creator_id: uuid.UUID
+    creator_id: str
     created_at: datetime
 
 
@@ -40,7 +42,7 @@ class TimeLogCreate(TimeLogBase):
 
 
 class TimeLogCreateInternal(TimeLogCreate):
-    creator_id: uuid.UUID
+    creator_id: str
 
 
 class TimeLogUpdate(SQLModel):
@@ -57,3 +59,32 @@ class TimeLogUpdateInternal(TimeLogUpdate):
 
 class TimeLogDelete(SQLModel):
     pass
+
+class TimeLogBatchUpsert(SQLModel):
+    timelogs: list[TimeLogCreate] = Field(..., min_items=1)
+    update_existing: bool = Field(default=True, description="Whether to update existing timelogs or skip them")
+
+class TimeLogBatchUpsertResponse(SQLModel):
+    timelogs: list[TimeLogRead]
+    failed_entries: list[dict] = Field(default_factory=list)
+
+class TimeLogBatchUpdate(SQLModel):
+    values: TimeLogUpdate
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    tags: Optional[list[str]] = None
+
+class TimeLogBatchDelete(SQLModel):
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    tags: Optional[list[str]] = None
+
+class TimeLogBatchCreate(SQLModel):
+    timelogs: List[TimeLogCreate]
+
+class TimeLogBatchRead(SQLModel):
+    timelogs: List[TimeLogRead]
+    failed_entries: List[dict] = []
+
+class TimeLogBatchDelete(SQLModel):
+    ids: List[int]
