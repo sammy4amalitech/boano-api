@@ -36,7 +36,8 @@ class User(UserBase, table=True):
 
 
 class UserRead(SQLModel):
-    id: int
+    id: str
+    uuid: str
     name: str
     username: str
     email: str

@@ -6,6 +6,8 @@ from sqlmodel import SQLModel, Field, Relationship
 from pydantic import BaseModel
 import uuid as uuid_pkg
 
+from src.app.models import User
+
 
 class TimeLogBase(SQLModel):
     task: str = Field(..., min_length=2, max_length=255, schema_extra={"example": "Project Planning"})
@@ -86,5 +88,3 @@ class TimeLogBatchRead(SQLModel):
     timelogs: List[TimeLogRead]
     failed_entries: List[dict] = []
 
-class TimeLogBatchDelete(SQLModel):
-    ids: List[int]
