@@ -16,6 +16,14 @@ class TimeLogBase(SQLModel):
     end_time: datetime
     source: str = Field(..., max_length=50, schema_extra={"example": "manual"})
 
+    def __init__(self, **data):
+        super().__init__(**data)
+        # Convert timezone-aware datetimes to naive UTC
+        if self.start_time and self.start_time.tzinfo:
+            self.start_time = self.start_time.astimezone(timezone.utc).replace(tzinfo=None)
+        if self.end_time and self.end_time.tzinfo:
+            self.end_time = self.end_time.astimezone(timezone.utc).replace(tzinfo=None)
+
 
 class TimeLog(TimeLogBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -40,7 +48,17 @@ class TimeLogRead(TimeLogBase):
 
 
 class TimeLogCreate(TimeLogBase):
-    pass
+    @classmethod
+    def model_validate(cls, obj):
+        if isinstance(obj, dict):
+            # Ensure start_time and end_time are timezone-aware
+            if 'start_time' in obj and isinstance(obj['start_time'], datetime):
+                if obj['start_time'].tzinfo is None:
+                    obj['start_time'] = obj['start_time'].replace(tzinfo=timezone.utc)
+            if 'end_time' in obj and isinstance(obj['end_time'], datetime):
+                if obj['end_time'].tzinfo is None:
+                    obj['end_time'] = obj['end_time'].replace(tzinfo=timezone.utc)
+        return super().model_validate(obj)
 
 
 class TimeLogCreateInternal(TimeLogCreate):
@@ -63,8 +81,10 @@ class TimeLogDelete(SQLModel):
     pass
 
 class TimeLogBatchUpsert(SQLModel):
-    timelogs: list[TimeLogCreate] = Field(..., min_items=1)
+    timelogs: list[TimeLogCreateInternal] = Field(..., min_items=1)
     update_existing: bool = Field(default=True, description="Whether to update existing timelogs or skip them")
+    creator_id: str = Field(..., description="ID of the user creating the timelogs")
+
 
 class TimeLogBatchUpsertResponse(SQLModel):
     timelogs: list[TimeLogRead]
@@ -86,5 +106,14 @@ class TimeLogBatchCreate(SQLModel):
 
 class TimeLogBatchRead(SQLModel):
     timelogs: List[TimeLogRead]
-    failed_entries: List[dict] = []
+    failed_entries: List[dict] = Field(default_factory=list)
+
+    @classmethod
+    def model_validate(cls, obj):
+        if isinstance(obj, dict):
+            # Extract timelogs from either 'data' key or root level
+            timelogs = obj.get('data', obj.get('timelogs', []))
+            failed_entries = obj.get('failed_entries', [])
+            obj = {'timelogs': timelogs, 'failed_entries': failed_entries}
+        return super().model_validate(obj)
 

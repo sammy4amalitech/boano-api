@@ -287,7 +287,9 @@ def cache(
         @functools.wraps(func)
         async def inner(request: Request, *args: Any, **kwargs: Any) -> Response:
             if client is None:
-                raise MissingClientError
+                # When Redis is not initialized, bypass caching
+                result = await func(request, *args, **kwargs)
+                return result
 
             if resource_id_name:
                 resource_id = kwargs[resource_id_name]

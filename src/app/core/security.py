@@ -14,7 +14,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..crud.crud_users import crud_users
 from .config import settings
-from .db.crud_token_blacklist import crud_token_blacklist
+# from .db.crud_token_blacklist import crud_token_blacklist
 from .schemas import TokenBlacklistCreate, TokenData
 
 SECRET_KEY = settings.SECRET_KEY
@@ -97,9 +97,9 @@ async def verify_token(token: str, db: AsyncSession) -> TokenData | None:
     TokenData | None
         TokenData instance if the token is valid, None otherwise.
     """
-    is_blacklisted = await crud_token_blacklist.exists(db, token=token)
-    if is_blacklisted:
-        return None
+    # is_blacklisted = await crud_token_blacklist.exists(db, token=token)
+    # if is_blacklisted:
+    #     return None
 
     try:
         # payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -113,10 +113,10 @@ async def verify_token(token: str, db: AsyncSession) -> TokenData | None:
         return None
 
 
-async def blacklist_token(token: str, db: AsyncSession) -> None:
-    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-    expires_at = datetime.fromtimestamp(payload.get("exp"))
-    await crud_token_blacklist.create(db, object=TokenBlacklistCreate(**{"token": token, "expires_at": expires_at}))
+# async def blacklist_token(token: str, db: AsyncSession) -> None:
+#     payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+#     expires_at = datetime.fromtimestamp(payload.get("exp"))
+#     await crud_token_blacklist.create(db, object=TokenBlacklistCreate(**{"token": token, "expires_at": expires_at}))
 
 
 

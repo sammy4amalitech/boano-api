@@ -91,7 +91,8 @@ def lifespan_factory(
         if isinstance(settings, DatabaseSettings) and create_tables_on_start:
             await create_tables()
 
-        if settings.ENVIRONMENT != EnvironmentOption.LOCAL:
+        # Skip Redis initialization for local development
+        if settings.ENVIRONMENT != EnvironmentOption.LOCAL and settings.ENVIRONMENT != EnvironmentOption.DEVELOPMENT:
             if isinstance(settings, RedisCacheSettings):
                 await create_redis_cache_pool()
 

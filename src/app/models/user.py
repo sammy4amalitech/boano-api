@@ -1,9 +1,9 @@
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Optional, List
 import uuid as uuid_pkg
 
 from sqlalchemy import Column, DateTime
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Relationship
 from pydantic import validator
 
 
@@ -33,6 +33,7 @@ class User(UserBase, table=True):
         sa_column=Column(DateTime(timezone=True))
     )
     is_deleted: bool = Field(default=False)
+    timelogs: List["TimeLog"] = Relationship(back_populates="creator")
 
 
 class UserRead(SQLModel):

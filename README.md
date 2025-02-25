@@ -281,11 +281,15 @@ And Finally the environment:
 ENVIRONMENT="local"
 ```
 
+> [!NOTE]
+> When `ENVIRONMENT` is set to `local` or `development`, Redis caching is automatically disabled. The application will bypass the caching mechanism and directly execute the endpoint functions. This is useful for local development when you don't want to set up Redis.
+
 `ENVIRONMENT` can be one of `local`, `staging` and `production`, defaults to local, and changes the behavior of api `docs` endpoints:
 
 - **local:** `/docs`, `/redoc` and `/openapi.json` available
 - **staging:** `/docs`, `/redoc` and `/openapi.json` available for superusers
 - **production:** `/docs`, `/redoc` and `/openapi.json` not available
+```
 
 ### 3.2 Docker Compose (preferred)
 

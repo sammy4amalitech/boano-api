@@ -67,5 +67,10 @@ class TokenBlacklistCreate(TokenBlacklistBase):
     pass
 
 
+class TokenBlacklistRead(TokenBlacklistBase):
+    id: int
+    created_at: datetime
+
+
 class TokenBlacklistUpdate(TokenBlacklistBase):
     pass

@@ -49,7 +49,6 @@ async def write_time_log(
 
     time_log_internal_dict = time_log.model_dump()
     time_log_internal_dict["created_by_user_id"] = db_user["id"]
-
     time_log_internal = TimeLogCreateInternal(**time_log_internal_dict)
     created_time_log: TimeLogRead = await crud_timelogs.create(db=db, object=time_log_internal)
     return created_time_log
@@ -69,20 +68,33 @@ async def write_time_logs_batch(
     # if current_user["id"] != db_user["id"]:
     #     raise ForbiddenException()
 
-    created_time_logs = []
-    failed_entries = []
-
-    for time_log in time_logs_batch.timelogs:
-        try:
-            time_log_internal_dict = time_log.model_dump()
-            time_log_internal_dict["created_by_user_id"] = db_user["id"]
-            time_log_internal = TimeLogCreateInternal(**time_log_internal_dict)
-            created_time_log = await crud_timelogs.create(db=db, object=time_log_internal)
-            created_time_logs.append(created_time_log)
-        except Exception as e:
-            failed_entries.append({"time_log": time_log.model_dump(), "error": str(e)})
-
-    return TimeLogBatchRead(timelogs=created_time_logs, failed_entries=failed_entries)
+    try:
+        # Prepare all time logs with user ID
+        time_log_internals = [
+            TimeLogCreateInternal(**{**time_log.model_dump(), "creator_id": db_user["id"]})
+            for time_log in time_logs_batch.timelogs
+        ]
+        
+        # Use upsert_multi for efficient batch operation
+        created_time_logs = await crud_timelogs.upsert_multi(
+            db=db,
+            instances=time_log_internals,
+            schema_to_select=TimeLogRead,
+            return_as_model=True
+        )
+        
+        await db.commit()  # Ensure the changes are committed to the database
+        
+        # Return the timelogs directly since upsert_multi already returns the correct format
+        return TimeLogBatchRead(timelogs=created_time_logs, failed_entries=[])
+        
+    except Exception as e:
+        # If batch operation fails, return all as failed entries
+        failed_entries = [
+            {"time_log": time_log.model_dump(), "error": str(e)}
+            for time_log in time_logs_batch.timelogs
+        ]
+        return TimeLogBatchRead(timelogs=[], failed_entries=failed_entries)
 
 @router.post("/user/{user_id}/time_logs/upsert", response_model=TimeLogBatchUpsertResponse, status_code=201)
 @cache("user_{user_id}_time_log_cache", pattern_to_invalidate_extra=["user_{user_id}_time_logs:*"])
@@ -100,26 +112,31 @@ async def upsert_time_logs_batch(
     if current_user["id"] != db_user["id"]:
         raise ForbiddenException()
 
-    created_time_logs = []
-    failed_entries = []
-
-    for time_log in time_logs_batch.timelogs:
-        try:
-            time_log_internal_dict = time_log.model_dump()
-            time_log_internal_dict["created_by_user_id"] = db_user["id"]
-            time_log_internal = TimeLogCreateInternal(**time_log_internal_dict)
-            
-            created_time_log = await crud_timelogs.upsert(
-                db=db,
-                object=time_log_internal,
-                schema_to_select=TimeLogRead,
-                update_existing=time_logs_batch.update_existing
-            )
-            created_time_logs.append(created_time_log)
-        except Exception as e:
-            failed_entries.append({"time_log": time_log.model_dump(), "error": str(e)})
-
-    return TimeLogBatchUpsertResponse(timelogs=created_time_logs, failed_entries=failed_entries)
+    try:
+        # Prepare all time logs with user ID
+        time_log_internals = [
+            TimeLogCreateInternal(**{**time_log.model_dump(), "created_by_user_id": db_user["id"]})
+            for time_log in time_logs_batch.timelogs
+        ]
+        
+        # Use upsert_multi for efficient batch operation
+        created_time_logs = await crud_timelogs.upsert_multi(
+            db=db,
+            instances=time_log_internals,
+            schema_to_select=TimeLogRead,
+            return_as_model=True,
+            update_existing=time_logs_batch.update_existing
+        )
+        
+        return TimeLogBatchUpsertResponse(timelogs=created_time_logs, failed_entries=[])
+        
+    except Exception as e:
+        # If batch operation fails, return all as failed entries
+        failed_entries = [
+            {"time_log": time_log.model_dump(), "error": str(e)}
+            for time_log in time_logs_batch.timelogs
+        ]
+        return TimeLogBatchUpsertResponse(timelogs=[], failed_entries=failed_entries)
 
 @router.patch("/user/{user_id}/time_logs/batch")
 @cache("user_{user_id}_time_log_cache", pattern_to_invalidate_extra=["user_{user_id}_time_logs:*"])
