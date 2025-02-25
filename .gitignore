@@ -168,3 +168,5 @@ cython_debug/
 
 team_history.json
 team_state.json
+
+./.idea

@@ -18,7 +18,6 @@ class User(UserBase, table=True):
     id: str = Field(default_factory=lambda: str(uuid_pkg.uuid4()), primary_key=True)
     profile_image_url: str = Field("https://www.profileimageurl.com")
     is_superuser: bool = Field(default=False)
-    tier_id: Optional[int] = Field(default=None, foreign_key="tier.id")
     created_at: datetime = Field(
         default_factory=lambda: datetime.now(timezone.utc),
         sa_column=Column(DateTime(timezone=True))
@@ -43,7 +42,6 @@ class UserRead(SQLModel):
     username: str
     email: str
     profile_image_url: str
-    tier_id: Optional[int]
 
 
 class UserCreate(UserBase):
@@ -66,7 +64,7 @@ class UserUpdateInternal(UserUpdate):
 
 
 class UserTierUpdate(SQLModel):
-    tier_id: int
+    pass
 
 
 class UserDelete(SQLModel):
