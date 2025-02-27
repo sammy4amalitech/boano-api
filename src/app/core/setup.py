@@ -26,7 +26,7 @@ from .config import (
     settings,
 )
 from .db.database import async_engine as engine
-from .utils import cache, queue, rate_limit
+from .utils import cache, queue
 from ..models import *
 
 # -------------- database --------------
@@ -56,12 +56,11 @@ async def close_redis_queue_pool() -> None:
 
 # -------------- rate limit --------------
 async def create_redis_rate_limit_pool() -> None:
-    rate_limit.pool = redis.ConnectionPool.from_url(settings.REDIS_RATE_LIMIT_URL)
-    rate_limit.client = redis.Redis.from_pool(rate_limit.pool)  # type: ignore
+    pass
 
 
 async def close_redis_rate_limit_pool() -> None:
-    await rate_limit.client.aclose()  # type: ignore
+    pass
 
 
 # -------------- application --------------

@@ -8,10 +8,7 @@ from ..core.db.database import async_get_db
 from ..core.exceptions.http_exceptions import ForbiddenException, RateLimitException, UnauthorizedException
 from ..core.logger import logging
 from ..core.security import oauth2_scheme, verify_token
-from ..core.utils.rate_limit import is_rate_limited
 from ..crud.crud_users import crud_users
-from ..models.user import User
-from ..models.rate_limit import sanitize_path
 
 logger = logging.getLogger(__name__)
 

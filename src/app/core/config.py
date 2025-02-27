@@ -129,6 +129,7 @@ class Settings(
     DefaultRateLimitSettings,
     EnvironmentSettings,
     AISettings,
+    AccessTokenSettings
 ):
     pass
 
