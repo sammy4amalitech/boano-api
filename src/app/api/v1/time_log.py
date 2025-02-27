@@ -5,13 +5,15 @@ from typing import Annotated, Any
 import aiofiles
 from autogen_agentchat.base import TaskResult
 from autogen_agentchat.messages import TextMessage, UserInputRequestedEvent
+from autogen_core import CancellationToken
 from fastapi import APIRouter, Depends, Request, WebSocket, WebSocketDisconnect
 from fastcrud.paginated import PaginatedListResponse, compute_offset, paginated_response
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ...ai.agents.calender import CalendarAgent
 from ...ai.agents.github import GitHubAgent
-from ...ai.teams.time_log import get_timelog_team, get_timelog_history, timelog_state_path, timelog_history_path
+from ...ai.teams.time_log import get_timelog_team, get_timelog_history, timelog_state_path, timelog_history_path, \
+    TimeLogTeam
 from ...api.dependencies import get_current_superuser, get_current_user, logger
 from ...core.config import settings
 from ...core.db.database import async_get_db
@@ -76,7 +78,7 @@ async def write_time_logs_batch(
         ]
         
         # Use upsert_multi for efficient batch operation
-        created_time_logs = await crud_timelogs.upsert_multi(
+        result = await crud_timelogs.upsert_multi(
             db=db,
             instances=time_log_internals,
             schema_to_select=TimeLogRead,
@@ -85,7 +87,8 @@ async def write_time_logs_batch(
         
         await db.commit()  # Ensure the changes are committed to the database
         
-        # Return the timelogs directly since upsert_multi already returns the correct format
+        # Extract timelogs from the result and format response
+        created_time_logs = result.get('data', []) if isinstance(result, dict) else result
         return TimeLogBatchRead(timelogs=created_time_logs, failed_entries=[])
         
     except Exception as e:
@@ -316,7 +319,7 @@ async def erase_db_time_log(
 
 @router.get("/timelog")
 async def get_timelog():
-    github_agent = GitHubAgent(github_token=tokens.GITHUB_ACCESS_TOKEN)
+    github_agent = GitHubAgent(github_token=settings.GITHUB_ACCESS_TOKEN)
     team_result = await TimeLogTeam(github_agent=github_agent.assistant, calendar_agent=CalendarAgent.assistant).run("John Doe")
     timelog = next((msg.content for msg in team_result.messages if msg.source == 'timelog'), None)
     return {"message": timelog}
