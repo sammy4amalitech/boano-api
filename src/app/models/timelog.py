@@ -41,6 +41,7 @@ class TimeLog(TimeLogBase, table=True):
 
 
 
+
 class TimeLogRead(TimeLogBase):
     id: int
     creator_id: str
@@ -62,8 +63,14 @@ class TimeLogCreate(TimeLogBase):
 
 
 class TimeLogCreateInternal(TimeLogCreate):
-    creator_id: str
+    pass
 
+class TimeLogUpsert(TimeLogCreate):
+    id: int | None = None
+
+class TimeUpsertInternal(TimeLogCreate):
+    id: int | None = None
+    creator_id: str
 
 class TimeLogUpdate(SQLModel):
     task: Optional[str] = Field(default=None, min_length=2, max_length=255)
@@ -80,21 +87,10 @@ class TimeLogUpdateInternal(TimeLogUpdate):
 class TimeLogDelete(SQLModel):
     pass
 
-class TimeLogBatchUpsert(SQLModel):
-    timelogs: list[TimeLogCreateInternal] = Field(..., min_items=1)
-    update_existing: bool = Field(default=True, description="Whether to update existing timelogs or skip them")
-    creator_id: str = Field(..., description="ID of the user creating the timelogs")
-
-
-class TimeLogBatchUpsertResponse(SQLModel):
-    timelogs: list[TimeLogRead]
-    failed_entries: list[dict] = Field(default_factory=list)
 
 class TimeLogBatchUpdate(SQLModel):
-    values: TimeLogUpdate
-    start_date: Optional[datetime] = None
-    end_date: Optional[datetime] = None
-    tags: Optional[list[str]] = None
+    timelogs: list[TimeLogUpdate] = Field(..., min_items=1)
+    update_existing: bool = Field(default=True, description="Whether to update existing timelogs or skip them")
 
 class TimeLogBatchDelete(SQLModel):
     start_date: Optional[datetime] = None
@@ -103,6 +99,9 @@ class TimeLogBatchDelete(SQLModel):
 
 class TimeLogBatchCreate(SQLModel):
     timelogs: List[TimeLogCreate]
+
+class TimeLogBatchUpsert(SQLModel):
+    timelogs: List[TimeLogUpsert]
 
 class TimeLogBatchRead(SQLModel):
     timelogs: List[TimeLogRead]
@@ -117,3 +116,7 @@ class TimeLogBatchRead(SQLModel):
             obj = {'timelogs': timelogs, 'failed_entries': failed_entries}
         return super().model_validate(obj)
 
+
+class TimeLogBatchUpsertResponse(SQLModel):
+    timelogs: list[TimeLogRead]
+    failed_entries: list[dict] = Field(default_factory=list)

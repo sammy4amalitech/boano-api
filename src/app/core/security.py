@@ -3,7 +3,7 @@ from datetime import UTC, datetime, timedelta
 from typing import Any, Literal
 
 import bcrypt
-import rsa
+from cryptography.hazmat.primitives.asymmetric import rsa
 from clerk_backend_api import Clerk
 from cryptography.hazmat.primitives import serialization
 from fastapi import HTTPException
@@ -105,9 +105,10 @@ async def verify_token(token: str, db: AsyncSession) -> TokenData | None:
         # payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         payload = jwt_claim(token)
         username_or_email: str = payload.get("email") or payload.get("username")
-        if username_or_email is None:
+        user_id = payload.get("id")
+        if username_or_email  is None or user_id is None:
             return None
-        return TokenData(username_or_email=username_or_email)
+        return TokenData(username_or_email=username_or_email,id=user_id )
 
     except JWTError:
         return None
@@ -121,6 +122,7 @@ async def verify_token(token: str, db: AsyncSession) -> TokenData | None:
 
 
 def jwt_claim(token: str):
+
         try:
             with Clerk(bearer_auth=settings.CLERK_SECRET_KEY) as sdk:
                 # get key set

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DeveloperToolsToolWindowSettingsV1" lastSelectedContentNodeId="jwt-encoder-decoder">
+    <developerToolsConfigurations>
+      <developerToolConfiguration developerToolId="jwt-encoder-decoder" id="428debe4-8e73-407a-af56-25ed07a8dbcf" name="Workbench">
+        <properties>
+          <property key="headerText" type="INPUT" value="kotlin.String|{&#10;  &quot;alg&quot;:&quot;RS256&quot;,&#10;  &quot;cat&quot;:&quot;cl_B7d4PD111AAA&quot;,&#10;  &quot;kid&quot;:&quot;ins_2tOVYVZ1ruMHvH29NDaYBiKAAL2&quot;,&#10;  &quot;typ&quot;:&quot;JWT&quot;&#10;}" />
+          <property key="payloadText" type="INPUT" value="kotlin.String|{&#10;  &quot;azp&quot;:&quot;http://localhost:3000&quot;,&#10;  &quot;email&quot;:&quot;aristocrat4gh@gmail.com&quot;,&#10;  &quot;exp&quot;:1740833022,&#10;  &quot;fva&quot;:[&#10;    4276,&#10;    -1&#10;  ],&#10;  &quot;iat&quot;:1740832962,&#10;  &quot;id&quot;:&quot;user_2tOYuvw6S0ptIcagz0eaJQyuhDd&quot;,&#10;  &quot;iss&quot;:&quot;https://flowing-dolphin-0.clerk.accounts.dev&quot;,&#10;  &quot;jti&quot;:&quot;7713bfb7afef0b98411c&quot;,&#10;  &quot;name&quot;:null,&#10;  &quot;nbf&quot;:1740832952,&#10;  &quot;sid&quot;:&quot;sess_2ta3XAPqPERcY6IHoQXpX25IQcg&quot;,&#10;  &quot;sub&quot;:&quot;user_2tOYuvw6S0ptIcagz0eaJQyuhDd&quot;,&#10;  &quot;surname&quot;:null&#10;}" />
+          <property key="encodedText" type="INPUT" value="kotlin.String|eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18ydE9WWVZaMXJ1TUh2SDI5TkRhWUJpS0FBTDIiLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJlbWFpbCI6ImFyaXN0b2NyYXQ0Z2hAZ21haWwuY29tIiwiZXhwIjoxNzQwODMzMDIyLCJmdmEiOls0Mjc2LC0xXSwiaWF0IjoxNzQwODMyOTYyLCJpZCI6InVzZXJfMnRPWXV2dzZTMHB0SWNhZ3owZWFKUXl1aERkIiwiaXNzIjoiaHR0cHM6Ly9mbG93aW5nLWRvbHBoaW4tMC5jbGVyay5hY2NvdW50cy5kZXYiLCJqdGkiOiI3NzEzYmZiN2FmZWYwYjk4NDExYyIsIm5hbWUiOm51bGwsIm5iZiI6MTc0MDgzMjk1Miwic2lkIjoic2Vzc18ydGEzWEFQcVBFUmNZNklIb1FYcFgyNUlRY2ciLCJzdWIiOiJ1c2VyXzJ0T1l1dnc2UzBwdEljYWd6MGVhSlF5dWhEZCIsInN1cm5hbWUiOm51bGx9.Zbgz73EkL-LwqqRIioRCqr0kL9gW8e-1kd_b10__CwhuMFHvx0-H-vg9GKEnQlxc-cqjNbVOP3HbyzaiEMqcZJ-pPfJESYAeeTu6KeORAHzimguaARNkl9CmGfXoL_KNWqUFX-JBhelCwIuw-iZAnLWprdSryy187E7ry7uRHc9cKrDV8Yaf_s_VArXLX7JNyu3VZg20R8StuBWptttHYbK9zFjnGUAaRjivvzOZ1QLXMInPA9_avu6JVOBsM6cWJ_oaQEtAuYtA-9hTUGX5XB6nPeIredTyQPdt0lQCY0aDq5wYkWqE0l6uXp1c95ukkFGcZldnNcz1QMwKailu9Q" />
+          <property key="algorithm" type="CONFIGURATION" value="dev.turingcomplete.intellijdevelopertoolsplugin._internal.tool.ui.converter.JwtEncoderDecoder$SignatureAlgorithm|RSA256" />
+        </properties>
+      </developerToolConfiguration>
+    </developerToolsConfigurations>
+  </component>
+</project>

@@ -25,7 +25,6 @@ async def get_current_user(
 
 
     user = await crud_users.get(db=db, uuid=token_data.id, is_deleted=False)
-
     if user:
         return user
 

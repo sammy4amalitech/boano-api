@@ -1,5 +1,6 @@
 import asyncio
 import json
+from keyword import kwlist
 from typing import Annotated, Any
 
 import aiofiles
@@ -23,11 +24,12 @@ from ...crud.crud_timelog import crud_timelogs
 from ...crud.crud_users import crud_users
 from datetime import datetime
 from typing import Optional
-
+from sqlalchemy.sql import case
 from pydantic import BaseModel
 
 from ...models.timelog import TimeLogRead, TimeLogCreate, TimeLogCreateInternal, TimeLogUpdate, TimeLogBatchRead, \
-    TimeLogBatchUpsertResponse, TimeLogBatchUpsert, TimeLogBatchUpdate, TimeLogBatchDelete, TimeLogBatchCreate
+    TimeLogBatchUpsertResponse, TimeLogBatchUpsert, TimeLogBatchUpdate, TimeLogBatchDelete, TimeLogBatchCreate, \
+    TimeLogUpdateInternal, TimeLogUpsert, TimeUpsertInternal
 from ...models.user import UserRead
 
 
@@ -55,41 +57,39 @@ async def write_time_log(
     created_time_log: TimeLogRead = await crud_timelogs.create(db=db, object=time_log_internal)
     return created_time_log
 
-@router.post("/user/{user_id}/time_logs/batch", response_model=TimeLogBatchRead, status_code=201)
-async def write_time_logs_batch(
+@router.post("/user/time_logs/batch", response_model=TimeLogBatchRead, status_code=201)
+async def upsert_time_log_batch(
     request: Request,
-    user_id: str,
-    time_logs_batch: TimeLogBatchCreate,
-    # current_user: Annotated[UserRead, Depends(get_current_user)],
+    time_logs_batch: TimeLogBatchUpsert,
+    current_user: Annotated[UserRead, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(async_get_db)],
 ) -> TimeLogBatchRead:
-    db_user = await crud_users.get(db=db, schema_to_select=UserRead, id=user_id, is_deleted=False)
-    if db_user is None:
-        raise NotFoundException("User not found")
 
-    # if current_user["id"] != db_user["id"]:
-    #     raise ForbiddenException()
-
+    # print('time_logs_batch', time_logs_batch)
     try:
+
+        update_override = {
+            "creator_id": current_user["id"]
+        }
+
         # Prepare all time logs with user ID
         time_log_internals = [
-            TimeLogCreateInternal(**{**time_log.model_dump(), "creator_id": db_user["id"]})
+            TimeUpsertInternal(**{**time_log.model_dump(), "creator_id": current_user["id"]})  # Set creator_id for each time log
             for time_log in time_logs_batch.timelogs
         ]
-        
         # Use upsert_multi for efficient batch operation
         result = await crud_timelogs.upsert_multi(
             db=db,
             instances=time_log_internals,
             schema_to_select=TimeLogRead,
+            update_override=update_override,
             return_as_model=True
         )
-        
         await db.commit()  # Ensure the changes are committed to the database
-        
+        print('result', result)
         # Extract timelogs from the result and format response
-        created_time_logs = result.get('data', []) if isinstance(result, dict) else result
-        return TimeLogBatchRead(timelogs=created_time_logs, failed_entries=[])
+        upserted_time_logs = result.get('data', []) if isinstance(result, dict) else result
+        return TimeLogBatchRead(timelogs=upserted_time_logs, failed_entries=[])
         
     except Exception as e:
         # If batch operation fails, return all as failed entries
@@ -97,49 +97,9 @@ async def write_time_logs_batch(
             {"time_log": time_log.model_dump(), "error": str(e)}
             for time_log in time_logs_batch.timelogs
         ]
+        print('failed_entries', failed_entries)
         return TimeLogBatchRead(timelogs=[], failed_entries=failed_entries)
 
-@router.post("/user/{user_id}/time_logs/upsert", response_model=TimeLogBatchUpsertResponse, status_code=201)
-@cache("user_{user_id}_time_log_cache", pattern_to_invalidate_extra=["user_{user_id}_time_logs:*"])
-async def upsert_time_logs_batch(
-    request: Request,
-    user_id: str,
-    time_logs_batch: TimeLogBatchUpsert,
-    current_user: Annotated[UserRead, Depends(get_current_user)],
-    db: Annotated[AsyncSession, Depends(async_get_db)],
-) -> TimeLogBatchUpsertResponse:
-    db_user = await crud_users.get(db=db, schema_to_select=UserRead, id=user_id, is_deleted=False)
-    if db_user is None:
-        raise NotFoundException("User not found")
-
-    if current_user["id"] != db_user["id"]:
-        raise ForbiddenException()
-
-    try:
-        # Prepare all time logs with user ID
-        time_log_internals = [
-            TimeLogCreateInternal(**{**time_log.model_dump(), "created_by_user_id": db_user["id"]})
-            for time_log in time_logs_batch.timelogs
-        ]
-        
-        # Use upsert_multi for efficient batch operation
-        created_time_logs = await crud_timelogs.upsert_multi(
-            db=db,
-            instances=time_log_internals,
-            schema_to_select=TimeLogRead,
-            return_as_model=True,
-            update_existing=time_logs_batch.update_existing
-        )
-        
-        return TimeLogBatchUpsertResponse(timelogs=created_time_logs, failed_entries=[])
-        
-    except Exception as e:
-        # If batch operation fails, return all as failed entries
-        failed_entries = [
-            {"time_log": time_log.model_dump(), "error": str(e)}
-            for time_log in time_logs_batch.timelogs
-        ]
-        return TimeLogBatchUpsertResponse(timelogs=[], failed_entries=failed_entries)
 
 @router.patch("/user/{user_id}/time_logs/batch")
 @cache("user_{user_id}_time_log_cache", pattern_to_invalidate_extra=["user_{user_id}_time_logs:*"])
@@ -211,26 +171,22 @@ async def erase_time_logs_batch(
 @router.get("/user/{user_id}/time_logs", response_model=PaginatedListResponse[TimeLogRead])
 @cache(
     key_prefix="user_{user_id}_time_logs:page_{page}:items_per_page:{items_per_page}",
-    resource_id_name="user_id",
     expiration=60,
 )
 async def read_time_logs(
     request: Request,
     user_id: str,
+    current_user: Annotated[UserRead, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(async_get_db)],
     page: int = 1,
     items_per_page: int = 10,
 ) -> dict:
-    db_user = await crud_users.get(db=db, schema_to_select=UserRead, id=user_id, is_deleted=False)
-    if not db_user:
-        raise NotFoundException("User not found")
-
     time_logs_data = await crud_timelogs.get_multi(
         db=db,
         offset=compute_offset(page, items_per_page),
         limit=items_per_page,
         schema_to_select=TimeLogRead,
-        created_by_user_id=db_user["id"],
+        created_by_user_id=current_user['id'],
         is_deleted=False,
     )
 
@@ -240,14 +196,17 @@ async def read_time_logs(
 @router.get("/user/{user_id}/time_log/{id}", response_model=TimeLogRead)
 @cache(key_prefix="user_{user_id}_time_log_cache", resource_id_name="id")
 async def read_time_log(
-    request: Request, user_id: str, id: int, db: Annotated[AsyncSession, Depends(async_get_db)]
+    request: Request,
+    id: int,
+    current_user: Annotated[UserRead, Depends(get_current_user)],
+    db: Annotated[AsyncSession, Depends(async_get_db)],
 ) -> dict:
-    db_user = await crud_users.get(db=db, schema_to_select=UserRead, id=user_id, is_deleted=False)
-    if db_user is None:
-        raise NotFoundException("User not found")
-
     db_time_log: TimeLogRead | None = await crud_timelogs.get(
-        db=db, schema_to_select=TimeLogRead, id=id, created_by_user_id=db_user["id"], is_deleted=False
+        db=db,
+        schema_to_select=TimeLogRead,
+        id=id,
+        created_by_user_id=current_user["id"],
+        is_deleted=False
     )
     if db_time_log is None:
         raise NotFoundException("Time Log not found")
@@ -258,20 +217,18 @@ async def read_time_log(
 @cache("user_{user_id}_time_log_cache", resource_id_name="id", pattern_to_invalidate_extra=["user_{user_id}_time_logs:*"])
 async def patch_time_log(
     request: Request,
-    user_id: str,
     id: int,
     values: TimeLogUpdate,
     current_user: Annotated[UserRead, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(async_get_db)],
 ) -> dict[str, str]:
-    db_user = await crud_users.get(db=db, schema_to_select=UserRead, id=user_id, is_deleted=False)
-    if db_user is None:
-        raise NotFoundException("User not found")
-
-    if current_user["id"] != db_user["id"]:
-        raise ForbiddenException()
-
-    db_time_log = await crud_timelogs.get(db=db, schema_to_select=TimeLogRead, id=id, is_deleted=False)
+    db_time_log = await crud_timelogs.get(
+        db=db,
+        schema_to_select=TimeLogRead,
+        id=id,
+        created_by_user_id=current_user["id"],
+        is_deleted=False
+    )
     if db_time_log is None:
         raise NotFoundException("Time Log not found")
 
@@ -279,22 +236,20 @@ async def patch_time_log(
     return {"message": "Time Log updated"}
 
 @router.delete("/user/{user_id}/time_log/{id}")
-@cache("user_{user_id}_time_log_cache", resource_id_name="id", to_invalidate_extra={"user_{user_id}_time_logs": "user_{user_id}"})
+@cache("user_{user_id}_time_log_cache", resource_id_name="id", to_invalidate_extra={"user_{user_id}_time_logs": "user"})
 async def erase_time_log(
     request: Request,
-    user_id: str,
     id: int,
     current_user: Annotated[UserRead, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(async_get_db)],
 ) -> dict[str, str]:
-    db_user = await crud_users.get(db=db, schema_to_select=UserRead, id=user_id, is_deleted=False)
-    if db_user is None:
-        raise NotFoundException("User not found")
-
-    if current_user["id"] != db_user["id"]:
-        raise ForbiddenException()
-
-    db_time_log = await crud_timelogs.get(db=db, schema_to_select=TimeLogRead, id=id, is_deleted=False)
+    db_time_log = await crud_timelogs.get(
+        db=db,
+        schema_to_select=TimeLogRead,
+        id=id,
+        created_by_user_id=current_user["id"],
+        is_deleted=False
+    )
     if db_time_log is None:
         raise NotFoundException("Time Log not found")
 
@@ -302,7 +257,7 @@ async def erase_time_log(
     return {"message": "Time Log deleted"}
 
 @router.delete("/user/{user_id}/db_time_log/{id}", dependencies=[Depends(get_current_superuser)])
-@cache("user_{user_id}_time_log_cache", resource_id_name="id", to_invalidate_extra={"user_{user_id}_time_logs": "user_{user_id}"})
+@cache("user_{user_id}_time_log_cache", resource_id_name="id", to_invalidate_extra={"user_{user_id}_time_logs": "user"})
 async def erase_db_time_log(
     request: Request, user_id: str, id: int, db: Annotated[AsyncSession, Depends(async_get_db)]
 ) -> dict[str, str]:
