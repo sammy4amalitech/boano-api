@@ -86,7 +86,6 @@ async def upsert_time_log_batch(
             return_as_model=True
         )
         await db.commit()  # Ensure the changes are committed to the database
-        print('result', result)
         # Extract timelogs from the result and format response
         upserted_time_logs = result.get('data', []) if isinstance(result, dict) else result
         return TimeLogBatchRead(timelogs=upserted_time_logs, failed_entries=[])
@@ -97,7 +96,6 @@ async def upsert_time_log_batch(
             {"time_log": time_log.model_dump(), "error": str(e)}
             for time_log in time_logs_batch.timelogs
         ]
-        print('failed_entries', failed_entries)
         return TimeLogBatchRead(timelogs=[], failed_entries=failed_entries)
 
 

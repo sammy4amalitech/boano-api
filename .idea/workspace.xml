@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="fix batch write">
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="upsert timelogs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/dependencies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/api/v1/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/time_log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/security.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/security.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/timelog.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/timelog.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_history.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_state.json" afterDir="false" />
     </list>
@@ -154,7 +152,7 @@
       <workItem from="1740601719055" duration="7319000" />
       <workItem from="1740784295945" duration="6708000" />
       <workItem from="1740855631445" duration="14000" />
-      <workItem from="1740855657760" duration="8242000" />
+      <workItem from="1740855657760" duration="19266000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -316,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740688190218</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="upsert timelogs">
+      <option name="closed" value="true" />
+      <created>1740865625450</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1740865625450</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,7 +359,8 @@
     <MESSAGE value="batch operations" />
     <MESSAGE value="remove unusd file and code" />
     <MESSAGE value="fix batch write" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix batch write" />
+    <MESSAGE value="upsert timelogs" />
+    <option name="LAST_COMMIT_MESSAGE" value="upsert timelogs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

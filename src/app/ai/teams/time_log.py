@@ -11,18 +11,17 @@ from autogen_ext.models.openai import OpenAIChatCompletionClient
 from autogen_agentchat.agents import AssistantAgent, UserProxyAgent
 from autogen_agentchat.conditions import ExternalTermination, TextMentionTermination
 from github import Auth, Github
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from src.app.ai.agents.calender import CalendarAgent
 from src.app.ai.agents.github import GitHubAgent
 from src.app.core.config import AISettings, AccessTokenSettings
 
 class TimeLog(BaseModel):
-    title: str
-    date : str
-    start_time: str
-    end_time: str
-    source: Literal["github", "calendar"]
+    task: str = Field(..., description="The task of the time log")
+    start_date: str = Field(..., description="The start date and time of the time log in ISO format")
+    end_date: str = Field(..., description="The end date and time of the time log in ISO format",)
+    source: Literal["github", "calendar"] = Field(..., description="The source of the time log",)
 
 class AgentResponse(BaseModel):
     thoughts: str
@@ -32,7 +31,9 @@ tokens = AccessTokenSettings()# Create an OpenAI model client.
 model_client = OpenAIChatCompletionClient(
     model="gpt-4o",
     api_key=AISettings().OPENAI_API_KEY,
-    response_format=AgentResponse, # type: ignore
+    response_format=AgentResponse, # type:
+
+    # gnore
 )
 
 model_config_path = "model_config.yaml"
@@ -71,7 +72,7 @@ class TimeLogTeam:
             [self.github_agent, self.calendar_agent, self.user_proxy],
             termination_condition=text_termination
         )
-        result = await team.run(task="Give me a json of of all timelogs in format: {title, date, time, person } . " )
+        result = await team.run(task="Give me a json of of all timelogs in format: {task, date, time, person } . " )
         print(result)
         return result
 
@@ -93,16 +94,15 @@ async def get_timelog_team(
           - You are responsible for combining all the timelogs from the tools.
           - If some of the timelogs are missing, you should use what timelogs are available.
           - Please provide the timelog in the following format:
-              title: str
+              task: str
               date : str
               start_time: datetime
               end_time: datatime
               source: Literal["github", "calendar"]
               eg:
-              title: "Meeting with the team"
-              date: "2021-10-01"
-              start_time: "13:00"
-              end_time: "14:00"
+              task: "Meeting with the team"
+                start_date: "2024-01-15T09:00:00",
+                end_date: "2024-01-15T10:00:00",
               source: "calendar"
           - Add additional information if needed
             thoughts: str
@@ -113,17 +113,15 @@ async def get_timelog_team(
               thoughts: "I have combined all the timelogs and here is the final list"
               response: [
                   {
-                      title: "Meeting with the team",
-                      date: "2021-10-01",
-                      start_time: "13:00",
-                      end_time: "14:00",
+                      task: "Meeting with the team",
+                      start_date: "2024-01-15T09:00:00",
+                      end_date: "2024-01-15T10:00:00",
                       source: "calendar"
                   },
                   {
-                      title: "Meeting with the team",
-                      date: "2021-10-01",
-                      start_time: "13:00",
-                      end_time: "14:00",
+                      task: "Meeting with the team",
+                      start_date: "2024-02-15T09:00:00",
+                      end_date: "2024-03-15T10:00:00",
                       source: "github"
                   }
               ]
