@@ -20,6 +20,10 @@ COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
+# Copy the environment file first
+COPY ./src/.env /code/.env
+
+# Then copy the application code
 COPY ./src/app /code/app
 
 # Production configuration using Gunicorn with Uvicorn workers
