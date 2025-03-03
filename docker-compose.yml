@@ -15,7 +15,7 @@ services:
       redis:
         condition: service_healthy
     volumes:
-      - ./src/app:/code/app
+      - ./src:/code/src
       - ./src/.env:/code/.env
     restart: always
 
@@ -29,7 +29,7 @@ services:
     depends_on:
       - redis
     volumes:
-      - ./src/app:/code/app
+      - ./src:/code/src
       - ./src/.env:/code/.env
     restart: always
 
