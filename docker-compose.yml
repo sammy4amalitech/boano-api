@@ -17,6 +17,8 @@ services:
     volumes:
       - ./src:/code/src
       - ./src/.env:/code/.env
+    environment:
+      - PYTHONPATH=/code/src
     restart: always
 
   worker:
@@ -31,6 +33,8 @@ services:
     volumes:
       - ./src:/code/src
       - ./src/.env:/code/.env
+    environment:
+      - PYTHONPATH=/code/src
     restart: always
 
   redis:
