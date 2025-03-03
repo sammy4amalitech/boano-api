@@ -21,8 +21,11 @@ COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 
-# Then copy the application code
-COPY ./src/app /code/app
+# Copy the entire src directory to maintain the package structure
+COPY ./src /code/src
+
+# Add src directory to PYTHONPATH
+ENV PYTHONPATH=/code/src
 
 # Production configuration using Gunicorn with Uvicorn workers
 # Set lower number of workers and add timeout settings for better stability
