@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="upsert timelogs">
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="basic timelogs flow fro creatting and update">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ai/agents/calender.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/calender.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ai/agents/chat_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/chat_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ai/agents/github.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/github.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/v1/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/time_log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/v1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/v1/autogen.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/timelog.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/timelog.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_history.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_state.json" afterDir="false" />
     </list>
@@ -65,30 +73,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;FastAPI.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;FastAPI.dev.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/samuel/PycharmProjects/boano-api/src/app/ai/tools/github&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "FastAPI.Unnamed.executor": "Run",
+    "FastAPI.dev.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "/Users/samuel/PycharmProjects/boano-api/src/app/ai/tools/github",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app/ai/tools/github" />
@@ -101,7 +110,7 @@
       <recent name="$PROJECT_DIR$/src/app" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration name="dev" type="Python.FastAPI">
       <option name="file" value="$PROJECT_DIR$/src/app/main.py" />
       <module name="boano-api" />
@@ -118,6 +127,23 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -152,7 +178,7 @@
       <workItem from="1740601719055" duration="7319000" />
       <workItem from="1740784295945" duration="6708000" />
       <workItem from="1740855631445" duration="14000" />
-      <workItem from="1740855657760" duration="19266000" />
+      <workItem from="1740855657760" duration="26294000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -322,7 +348,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740865625450</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="basic timelogs flow fro creatting and update">
+      <option name="closed" value="true" />
+      <created>1740926002145</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1740926002145</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +394,8 @@
     <MESSAGE value="remove unusd file and code" />
     <MESSAGE value="fix batch write" />
     <MESSAGE value="upsert timelogs" />
-    <option name="LAST_COMMIT_MESSAGE" value="upsert timelogs" />
+    <MESSAGE value="basic timelogs flow fro creatting and update" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic timelogs flow fro creatting and update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

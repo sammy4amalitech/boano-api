@@ -5,7 +5,7 @@ from autogen_ext.models.openai import OpenAIChatCompletionClient
 from github import Github, Auth
 from pydantic import BaseModel
 from pydriller import Repository
-from src.app.core.config import AISettings
+from ...core.config import AISettings
 
 class Commit(BaseModel):
     hash: str

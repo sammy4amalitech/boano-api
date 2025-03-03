@@ -166,6 +166,6 @@ cython_debug/
 
 .ruff_cache
 
-./team_state.json
 ./team_history.json
+./team_state.json
 ./.idea

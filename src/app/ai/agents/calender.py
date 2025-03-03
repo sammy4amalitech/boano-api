@@ -6,7 +6,8 @@ from autogen_agentchat.agents import AssistantAgent
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 from pydantic import BaseModel
 
-from src.app.core.config import AISettings
+from ...core.config import AISettings
+
 
 class Event(BaseModel):
     title: str

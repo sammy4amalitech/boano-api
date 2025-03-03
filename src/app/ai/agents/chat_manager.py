@@ -2,7 +2,7 @@ import asyncio
 import autogen
 from typing import Dict, Any
 
-from src.app.core.config import AISettings
+from ...core.config import AISettings
 
 
 class AgentChatManager:

@@ -12,10 +12,7 @@ from autogen_agentchat.agents import AssistantAgent, UserProxyAgent
 from autogen_agentchat.conditions import ExternalTermination, TextMentionTermination
 from github import Auth, Github
 from pydantic import BaseModel, Field
-
-from src.app.ai.agents.calender import CalendarAgent
-from src.app.ai.agents.github import GitHubAgent
-from src.app.core.config import AISettings, AccessTokenSettings
+from ...core.config import AISettings, AccessTokenSettings
 
 class TimeLog(BaseModel):
     task: str = Field(..., description="The task of the time log")

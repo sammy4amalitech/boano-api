@@ -3,10 +3,9 @@ from typing import Optional, List
 
 from sqlalchemy import Column, DateTime, String, Text
 from sqlmodel import SQLModel, Field, Relationship
-from pydantic import BaseModel
-import uuid as uuid_pkg
 
-from src.app.models import User
+
+from ..models import User
 
 
 class TimeLogBase(SQLModel):
