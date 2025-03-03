@@ -22,5 +22,5 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./src/app /code/app
 
-# Production configuration using Gunicorn with Uvicorn workers
-CMD ["gunicorn", "app.main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000"]
+# Development configuration using Uvicorn with hot-reload
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

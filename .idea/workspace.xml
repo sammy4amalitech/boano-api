@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="basic timelogs flow fro creatting and update">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="working dockerize">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/ai/agents/calender.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/calender.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/ai/agents/chat_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/chat_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/ai/agents/github.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/agents/github.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ai/teams/time_log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/v1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/v1/autogen.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/timelog.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/timelog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/src/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_history.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_state.json" afterDir="false" />
     </list>
@@ -75,6 +68,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.docker-compose.dev.yml: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
     "FastAPI.Unnamed.executor": "Run",
     "FastAPI.dev.executor": "Run",
@@ -131,6 +125,14 @@
       <deployment type="docker-compose.yml" />
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.dev.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -142,6 +144,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.dev.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -178,7 +181,7 @@
       <workItem from="1740601719055" duration="7319000" />
       <workItem from="1740784295945" duration="6708000" />
       <workItem from="1740855631445" duration="14000" />
-      <workItem from="1740855657760" duration="26294000" />
+      <workItem from="1740855657760" duration="27873000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -356,7 +359,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740926002145</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="working dockerize">
+      <option name="closed" value="true" />
+      <created>1741000138670</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1741000138670</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,7 +406,8 @@
     <MESSAGE value="fix batch write" />
     <MESSAGE value="upsert timelogs" />
     <MESSAGE value="basic timelogs flow fro creatting and update" />
-    <option name="LAST_COMMIT_MESSAGE" value="basic timelogs flow fro creatting and update" />
+    <MESSAGE value="working dockerize" />
+    <option name="LAST_COMMIT_MESSAGE" value="working dockerize" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
