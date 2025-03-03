@@ -6,13 +6,14 @@ services:
       context: .
       dockerfile: Dockerfile
     # Production configuration using Gunicorn with Uvicorn workers
-    command: gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
+    command: gunicorn app.main:app -w 2 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 --timeout 120 --graceful-timeout 60 --max-requests 1000 --max-requests-jitter 50
     env_file:
       - ./src/.env
     ports:
       - "8000:8000"
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     volumes:
       - ./src/app:/code/app
       - ./src/.env:/code/.env
@@ -39,6 +40,11 @@ services:
     expose:
       - "6379"
     restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 volumes:
   redis-data:
