@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="working dockerize">
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="revert config batch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/src/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_history.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_state.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,12 +37,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="develop" />
-                    <option name="lastUsedInstant" value="1740519909" />
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1741021682" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1739367004" />
+                    <option name="branchName" value="develop" />
+                    <option name="lastUsedInstant" value="1741003534" />
                   </RecentBranch>
                 </list>
               </option>
@@ -74,7 +69,7 @@
     "FastAPI.dev.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/samuel/PycharmProjects/boano-api/src/app/ai/tools/github",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.stylelint": "true",
@@ -122,7 +117,9 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml" />
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="docker-compose.dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
@@ -145,6 +142,9 @@
       <list>
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.dev.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.dev.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -367,7 +367,55 @@
       <option name="project" value="LOCAL" />
       <updated>1741000138670</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="updated docker files">
+      <option name="closed" value="true" />
+      <created>1741003500286</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1741003500286</updated>
+    </task>
+    <task id="LOCAL-00025" summary="undo docker update">
+      <option name="closed" value="true" />
+      <created>1741006913112</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1741006913112</updated>
+    </task>
+    <task id="LOCAL-00026" summary="reduce worker nodes and timeouts">
+      <option name="closed" value="true" />
+      <created>1741008641369</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1741008641370</updated>
+    </task>
+    <task id="LOCAL-00027" summary="reduce worker nodes and timeouts">
+      <option name="closed" value="true" />
+      <created>1741008647201</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1741008647201</updated>
+    </task>
+    <task id="LOCAL-00028" summary="change config batch">
+      <option name="closed" value="true" />
+      <created>1741011850566</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1741011850566</updated>
+    </task>
+    <task id="LOCAL-00029" summary="revert config batch">
+      <option name="closed" value="true" />
+      <created>1741021666854</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1741021666854</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,8 +433,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="initial commit" />
-    <MESSAGE value="fix post creator error" />
     <MESSAGE value="updated timestamp field" />
     <MESSAGE value="commit logs tool" />
     <MESSAGE value="websocket setup" />
@@ -407,7 +453,12 @@
     <MESSAGE value="upsert timelogs" />
     <MESSAGE value="basic timelogs flow fro creatting and update" />
     <MESSAGE value="working dockerize" />
-    <option name="LAST_COMMIT_MESSAGE" value="working dockerize" />
+    <MESSAGE value="updated docker files" />
+    <MESSAGE value="undo docker update" />
+    <MESSAGE value="reduce worker nodes and timeouts" />
+    <MESSAGE value="change config batch" />
+    <MESSAGE value="revert config batch" />
+    <option name="LAST_COMMIT_MESSAGE" value="revert config batch" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
