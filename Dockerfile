@@ -20,7 +20,11 @@ COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-COPY ./src/app /code/app
+# Copy the entire src directory to maintain proper Python package structure
+COPY ./src /code/src
+
+# Set PYTHONPATH to include the src directory
+ENV PYTHONPATH=/code/src
 
 # Production configuration using Gunicorn with Uvicorn workers
 CMD ["gunicorn", "app.main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000"]
