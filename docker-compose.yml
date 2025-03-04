@@ -4,27 +4,11 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
-    # Production configuration using Gunicorn with Uvicorn workers
-    command: gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
+      dockerfile: Dockerfile.dev
     env_file:
       - ./src/.env
     ports:
       - "8000:8000"
-    depends_on:
-      - redis
-    volumes:
-      - ./src/app:/code/app
-      - ./src/.env:/code/.env
-    restart: always
-
-  worker:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: arq app.core.worker.settings.WorkerSettings
-    env_file:
-      - ./src/.env
     depends_on:
       - redis
     volumes:

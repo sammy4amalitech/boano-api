@@ -24,14 +24,14 @@ services:
     environment:
       - PYTHONPATH=/code/src
 
-  worker:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    command: arq app.core.worker.settings.WorkerSettings
-    env_file:
-      - ./src/.env
-    depends_on:
+  # worker:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   command: arq app.core.worker.settings.WorkerSettings
+  #   env_file:
+  #     - ./src/.env
+  #   depends_on:
 #      - db
       - redis
     volumes:
