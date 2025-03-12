@@ -4,12 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="revert to last working docker configs">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="use environemnt instead of envrioment file">
+      <change afterPath="$PROJECT_DIR$/.idea/swagger-settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/boano-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/boano-api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/v1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/worker/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/worker/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/016ee7d6b0b9_remove_unique_contrainta.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/075f641caa2e_make_uuid_string.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/29466908bf3e_fix_created_at_timeone_issues.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/33cfec9c9fc5_drop_post_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/36953a014b97_drop_post_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/3ecb4e9492d0_modify_datetime_column.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/40be74e6375e_remove_tier_field_from_user.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/4498a252d507_remove_all_uuid_tables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/4a8e7d2da15d_make_id_uuid_with_default_uuid_package.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/569174511974_create_tables.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/5b0c04db4041_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/5c0e43231c13_ensure_user_id_is_unique.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/605f88e55e7a_drop_post_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/61fcea1dca3b_make_email_and_uuid_unique.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/623ef1e66179_make_id_uuid.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/656df8b99e6a_drop_timelog_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/75bcf320385f_user_unique_id.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/8b8e624d3a28_drop_post_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/8d817d8cad7b_timelog_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/a537e639c8a5_use_sqlachemy_timezone.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/b7ec49f8797d_make_user_id_a_string.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/bca954b13aff_change_updated_at_lamda_type.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/bd840a3fc487_remove_password_field.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/c0b46f3a0fc3_post_table.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/versions/d04e0ac2b737_make_id_user_table_primary_key.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/team_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_history.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/team_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_state.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,32 +97,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker-compose.dev.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;FastAPI.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;FastAPI.dev.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/samuel/PycharmProjects/boano-api/src/app/ai/tools/github&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.dev.yml: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "FastAPI.Unnamed.executor": "Run",
+    "FastAPI.dev.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "/Users/samuel/PycharmProjects/boano-api/src/app/ai/tools/github",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app/ai/tools/github" />
@@ -103,7 +135,7 @@
       <recent name="$PROJECT_DIR$/src/app" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="FastAPI.dev">
     <configuration name="dev" type="Python.FastAPI">
       <option name="file" value="$PROJECT_DIR$/src/app/main.py" />
       <module name="boano-api" />
@@ -186,6 +218,8 @@
       <workItem from="1740784295945" duration="6708000" />
       <workItem from="1740855631445" duration="14000" />
       <workItem from="1740855657760" duration="27873000" />
+      <workItem from="1741110889641" duration="608000" />
+      <workItem from="1741111506709" duration="27864000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -514,6 +548,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/boano_api$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1739821774670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/boano_api$dev.coverage" NAME="dev Coverage Results" MODIFIED="1740079472647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/boano_api$dev.coverage" NAME="dev Coverage Results" MODIFIED="1741721143218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
