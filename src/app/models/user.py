@@ -33,6 +33,7 @@ class User(UserBase, table=True):
     )
     is_deleted: bool = Field(default=False)
     timelogs: List["TimeLog"] = Relationship(back_populates="creator")
+    plugin_tokens: List["PluginToken"] = Relationship(back_populates="user")
 
 
 class UserRead(SQLModel):

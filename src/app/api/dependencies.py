@@ -9,6 +9,7 @@ from ..core.exceptions.http_exceptions import ForbiddenException, RateLimitExcep
 from ..core.logger import logging
 from ..core.security import oauth2_scheme, verify_token
 from ..crud.crud_users import crud_users
+from ..models.user import UserRead
 
 logger = logging.getLogger(__name__)
 
@@ -18,13 +19,13 @@ DEFAULT_PERIOD = settings.DEFAULT_RATE_LIMIT_PERIOD
 
 async def get_current_user(
     token: Annotated[str, Depends(oauth2_scheme)], db: Annotated[AsyncSession, Depends(async_get_db)]
-) -> dict[str, Any] | None:
+) -> UserRead | None:
     token_data = await verify_token(token, db)
     if token_data is None:
         raise UnauthorizedException("User not authenticated.")
 
 
-    user = await crud_users.get(db=db, uuid=token_data.id, is_deleted=False)
+    user = await crud_users.get(db=db, uuid=token_data.id, is_deleted=False,schema_to_select=UserRead)
     if user:
         return user
 
@@ -62,6 +63,3 @@ async def get_current_superuser(current_user: Annotated[dict, Depends(get_curren
         raise ForbiddenException("You do not have enough privileges.")
 
     return current_user
-
-
-

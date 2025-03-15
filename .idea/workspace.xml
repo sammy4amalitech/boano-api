@@ -4,42 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="use environemnt instead of envrioment file">
-      <change afterPath="$PROJECT_DIR$/.idea/swagger-settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/boano-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/boano-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+    <list default="true" id="00108adb-cfef-4d59-b92a-159a958e23e3" name="Changes" comment="delete all migration and create fresh migration">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/21cf248e-915b-46ab-81ab-c0ec4d5a721b.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/21cf248e-915b-46ab-81ab-c0ec4d5a721b/storage_v2/_src_/database/boano.de6YBQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/21cf248e-915b-46ab-81ab-c0ec4d5a721b/storage_v2/_src_/database/boano.de6YBQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/developer-tools.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/developer-tools.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ruff.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ruff.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/dependencies.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/api/v1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/v1/time_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/v1/time_log.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/016ee7d6b0b9_remove_unique_contrainta.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/075f641caa2e_make_uuid_string.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/29466908bf3e_fix_created_at_timeone_issues.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/33cfec9c9fc5_drop_post_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/36953a014b97_drop_post_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/3ecb4e9492d0_modify_datetime_column.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/40be74e6375e_remove_tier_field_from_user.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/4498a252d507_remove_all_uuid_tables.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/4a8e7d2da15d_make_id_uuid_with_default_uuid_package.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/569174511974_create_tables.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/5b0c04db4041_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/5c0e43231c13_ensure_user_id_is_unique.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/605f88e55e7a_drop_post_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/61fcea1dca3b_make_email_and_uuid_unique.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/623ef1e66179_make_id_uuid.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/656df8b99e6a_drop_timelog_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/75bcf320385f_user_unique_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/8b8e624d3a28_drop_post_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/8d817d8cad7b_timelog_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/a537e639c8a5_use_sqlachemy_timezone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/b7ec49f8797d_make_user_id_a_string.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/bca954b13aff_change_updated_at_lamda_type.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/bd840a3fc487_remove_password_field.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/c0b46f3a0fc3_post_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/migrations/versions/d04e0ac2b737_make_id_user_table_primary_key.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/team_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_history.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/team_state.json" beforeDir="false" afterPath="$PROJECT_DIR$/team_state.json" afterDir="false" />
     </list>
@@ -114,7 +93,7 @@
     "node.js.selected.package.stylelint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable",
+    "settings.editor.selected.configurable": "com.koxudaxi.ruff.RuffConfigurable",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -219,7 +198,10 @@
       <workItem from="1740855631445" duration="14000" />
       <workItem from="1740855657760" duration="27873000" />
       <workItem from="1741110889641" duration="608000" />
-      <workItem from="1741111506709" duration="27864000" />
+      <workItem from="1741111506709" duration="32369000" />
+      <workItem from="1741896506988" duration="1535000" />
+      <workItem from="1741898133663" duration="3999000" />
+      <workItem from="1742062840926" duration="3757000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -485,7 +467,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741076822401</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="delete all migration and create fresh migration">
+      <option name="closed" value="true" />
+      <created>1741809047039</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1741809047039</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +493,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added cors" />
     <MESSAGE value="clerk setup" />
     <MESSAGE value="webhook setup" />
     <MESSAGE value="use clerk user id for uuid in db" />
@@ -528,7 +517,8 @@
     <MESSAGE value="Add src directory to PYTHONPATH" />
     <MESSAGE value="remove src directory to PYTHONPATH" />
     <MESSAGE value="revert to last working docker configs" />
-    <option name="LAST_COMMIT_MESSAGE" value="revert to last working docker configs" />
+    <MESSAGE value="delete all migration and create fresh migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete all migration and create fresh migration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,6 +1,5 @@
 import asyncio
 import json
-from keyword import kwlist
 from typing import Annotated, Any
 
 import aiofiles
@@ -13,8 +12,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ...ai.agents.calender import CalendarAgent
 from ...ai.agents.github import GitHubAgent
-from ...ai.teams.time_log import get_timelog_team, get_timelog_history, timelog_state_path, timelog_history_path, \
-    TimeLogTeam
+from ...ai.teams.time_log import (
+    TimeLogTeam,
+    get_timelog_history,
+    get_timelog_team,
+    timelog_history_path,
+    timelog_state_path,
+)
 from ...api.dependencies import get_current_superuser, get_current_user, logger
 from ...core.config import settings
 from ...core.db.database import async_get_db
@@ -22,17 +26,18 @@ from ...core.exceptions.http_exceptions import ForbiddenException, NotFoundExcep
 from ...core.utils.cache import cache
 from ...crud.crud_timelog import crud_timelogs
 from ...crud.crud_users import crud_users
-from datetime import datetime
-from typing import Optional
-from sqlalchemy.sql import case
-from pydantic import BaseModel
-
-from ...models.timelog import TimeLogRead, TimeLogCreate, TimeLogCreateInternal, TimeLogUpdate, TimeLogBatchRead, \
-    TimeLogBatchUpsertResponse, TimeLogBatchUpsert, TimeLogBatchUpdate, TimeLogBatchDelete, TimeLogBatchCreate, \
-    TimeLogUpdateInternal, TimeLogUpsert, TimeUpsertInternal
+from ...models.timelog import (
+    TimeLogBatchDelete,
+    TimeLogBatchRead,
+    TimeLogBatchUpdate,
+    TimeLogBatchUpsert,
+    TimeLogCreate,
+    TimeLogCreateInternal,
+    TimeLogRead,
+    TimeLogUpdate,
+    TimeUpsertInternal,
+)
 from ...models.user import UserRead
-
-
 
 router = APIRouter(tags=["time_logs"])
 
@@ -89,7 +94,7 @@ async def upsert_time_log_batch(
         # Extract timelogs from the result and format response
         upserted_time_logs = result.get('data', []) if isinstance(result, dict) else result
         return TimeLogBatchRead(timelogs=upserted_time_logs, failed_entries=[])
-        
+
     except Exception as e:
         # If batch operation fails, return all as failed entries
         failed_entries = [
@@ -116,7 +121,7 @@ async def update_time_logs_batch(
         raise ForbiddenException()
 
     filters = {"created_by_user_id": db_user["id"], "is_deleted": False}
-    
+
     if batch_update.start_date:
         filters["created_at__gte"] = batch_update.start_date
     if batch_update.end_date:
@@ -150,7 +155,7 @@ async def erase_time_logs_batch(
         raise ForbiddenException()
 
     filters = {"created_by_user_id": db_user["id"], "is_deleted": False}
-    
+
     if batch_delete.start_date:
         filters["created_at__gte"] = batch_delete.start_date
     if batch_delete.end_date:

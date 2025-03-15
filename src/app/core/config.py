@@ -1,8 +1,12 @@
+import os
 from enum import Enum
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class PydanticBaseSettings(BaseSettings):
-    model_config = SettingsConfigDict(env_file='src/.env', extra='ignore')
+    # ENV = PROD
+    # model_config = SettingsConfigDict(env_file='src/.env', extra='ignore')
+    # ENV = DEV
+    model_config = SettingsConfigDict(env_file=os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '.env'), extra='ignore')
 
 print("Settings loaded", PydanticBaseSettings())
 class AppSettings(PydanticBaseSettings):
@@ -114,6 +118,11 @@ class EnvironmentSettings(PydanticBaseSettings):
 class AISettings(PydanticBaseSettings):
     OPENAI_API_KEY: str | None = None
 
+class GitHubSettings(PydanticBaseSettings):
+    GITHUB_CLIENT_ID: str
+    GITHUB_CLIENT_SECRET: str
+    GITHUB_REDIRECT_URI: str
+
 class AccessTokenSettings(PydanticBaseSettings):
     GITHUB_ACCESS_TOKEN: str | None = None
 
@@ -136,6 +145,7 @@ class Settings(
     DefaultRateLimitSettings,
     EnvironmentSettings,
     AISettings,
+    GitHubSettings,
     AccessTokenSettings
 ):
     pass
